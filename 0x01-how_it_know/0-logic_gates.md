@@ -31,6 +31,7 @@ the control wire is on; the inverse is true
     |0|1|
 
     * truth table for `AND`
+
     |input1|input2|output|
     |:---:|:---:|:---:|
     |0|0|0|
@@ -39,6 +40,7 @@ the control wire is on; the inverse is true
     |1|1|1|
 
     * truth table for `NAND`
+
     |input1|input2|output `AND`|output `NAND`|
     |:---:|:---:|:---:|:---:|
     |0|0|0|1|
@@ -47,6 +49,7 @@ the control wire is on; the inverse is true
     |1|1|1|0|
 
     * truth table for `OR`
+
     |input1|input2|output|
     |:---:|:---:|:---:|
     |0|0|0|
@@ -55,6 +58,7 @@ the control wire is on; the inverse is true
     |1|1|1|
 
     * truth table for `NOR`
+
     |input1|input2|output `OR`|output `NOR`|
     |:---:|:---:|:---:|:---:|
     |0|0|0|1|
@@ -63,6 +67,7 @@ the control wire is on; the inverse is true
     |1|1|1|0|
 
     * truth table for `XOR`
+    
     |input1|input2|output|
     |:---:|:---:|:---:|
     |0|0|0|
