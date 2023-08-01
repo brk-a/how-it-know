@@ -1,4 +1,4 @@
-# Why does anyoe require a programming language?
+# Why does anyone require a programming language?
 
 * simple: a human, for now, must give instructions to a computer using 
 a programming language
