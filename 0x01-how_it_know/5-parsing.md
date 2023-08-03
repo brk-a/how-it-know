@@ -66,7 +66,7 @@ _tokenises_ all the input it receives
             * second pass: `<term> 3` + `<term> 5` * `<expr>`
             * third pass: `<term> 3` + `<term> 5` * `<term> 2`
             * but `<term>` is `<int>` so: `<int> 3` + `<int> 5` * `<int> 2`
-            * however, `<int>` is \[0-9\] so: `<expr>` ::== `3` + `5` * `2` 
+            * however, `<int>` is \[0-9\] so: `<expr>` ::= `3` + `5` * `2` 
 
 
 

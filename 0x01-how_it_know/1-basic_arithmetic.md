@@ -1,6 +1,6 @@
 # How computers perform basic arithmetic
 
-### how to machines add, subtract, multiply and divide?
+### how do machines add, subtract, multiply and divide?
 * very good question; start with addition
 * before that, learn about the base 2 counting system; this is 
 the system that machines use. we, mostly, use base 10 in our day-to-day:

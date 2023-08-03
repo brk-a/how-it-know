@@ -25,6 +25,7 @@ the control wire is on; the inverse is true
     * `XOR` compares two inputs and outputs 1 IFF only one input is 1, else 0
 * truth tables are tables/grids that show the _truthyness_ of output under a specific logic gate
     * truth table for `NOT`
+    
     |input|output|
     |:---:|:---:|
     |1|0|
