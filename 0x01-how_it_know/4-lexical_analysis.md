@@ -16,4 +16,6 @@ Py to create FrankenScript
 * the lexical analyser takes in the code typed by the user and passes its output
     to the parser
     * example output: instruction `1 + 3`
-        * [Token(1, int), Token(+, op), Token(3, int)] 
+        * [Token(1, int), Token(+, op), Token(3, int)]
+* lexical analyser does not care about the syntax of the language; it, simply,
+_tokenises_ all the input it receives
