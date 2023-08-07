@@ -6,6 +6,9 @@ takes in a string that contains input
 returns an array (py list) of tokens
 '''
 
+from tokens import Integer, Operator, Float
+
+
 class Lexer:
     """class Lexer: analyser"""
     DIGITS = "0123456789"
@@ -55,43 +58,3 @@ class Lexer:
         self.idx += 1
         if self.idx<len(self.text):
             self.char = self.text[self.idx]
-
-
-class Token:
-    """class Token: base token"""
-    def __init__(self, type, value):
-        self.type = type
-        self.value = value
-    
-    def __repr__(self):
-        return self.value
-
-
-class Integer(Token):
-    """"class Integer: token of type int"""
-    def __init__(self, value):
-        super().__init__("INT", value)
-
-
-class Float(Token):
-    """"class Float: token of type float"""
-    def __init__(self, value):
-        super().__init__("FLT", value)
-
-
-class String(Token):
-    """"class String: token of type str"""
-    def __init__(self, value):
-        super().__init__("STR", value)
-
-
-class Operator(Token):
-    """"class Operator: token of type op"""
-    def __init__(self, value):
-        super().__init__("OP", value)
-
-
-# class Integer(Token):
-#     """"class Integer: token of type int"""
-#     def __init__(self, value):
-#         super().__init__("INT", value)
