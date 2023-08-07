@@ -30,6 +30,10 @@ class Parser:
         """method factor: defines the `Factor` non-terminal"""
         if self.token.type=="INT" or self.token.type=="FLT":
             return self.token
+        elif self.token=="(":
+            self.move()
+            expression = self.expression()
+            return expression
 
     def term(self):
         """method term: defines the `term`"""

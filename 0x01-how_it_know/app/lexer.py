@@ -12,7 +12,7 @@ from tokens import Integer, Operator, Float
 class Lexer:
     """class Lexer: analyser"""
     DIGITS = "0123456789"
-    OPS = "+-*/%"
+    OPS = "+-*/%()"
     STOPWORDS = [" ",]
 
     def __init__(self, text):
