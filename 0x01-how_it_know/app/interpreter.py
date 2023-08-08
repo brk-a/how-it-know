@@ -65,5 +65,7 @@ class Interpreter:
             output = left * right
         elif op.value=="/":
             output = left / right
+        elif op.value=="%":
+            output = left % right
 
         return Integer(output) if (left_type=="INT" and right_type=="int") else Float(output)

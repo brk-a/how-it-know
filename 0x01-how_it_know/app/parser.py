@@ -34,6 +34,8 @@ class Parser:
             self.move()
             expression = self.expression()
             return expression
+        elif self.token.type.startswith("VAR"):
+            return self.token
 
     def term(self):
         """method term: defines the `term`"""
@@ -57,6 +59,26 @@ class Parser:
             left_node = [left_node, op, right_node]
         return left_node
 
+    def statement(self):
+        """method statement: handles declarations and assignments"""
+        if self.token.type=="RSVD":
+            self.move()
+            left_node = self.variable()
+            self.move()
+            if self.token.value=="=":
+                op = self.token
+                self.move()
+                right_node = self.expression()
+                return [left_node, op, right_node]
+        elif self.token.type=="INT" or self.token.type=="FLT" or self.token.type=="OP":
+            return self.expression()
+
+    def variable(self):
+        """method variable: creates a variable"""
+        if self.token.type.startswith("VAR"):
+            return self.token
+        
+
     def parse(self):
         """method parse: parses the input string"""
-        return self.expression()
+        return self.statement()

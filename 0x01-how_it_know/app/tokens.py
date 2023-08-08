@@ -32,7 +32,12 @@ class Operator(Token):
         super().__init__("OP", value)
 
 
-# class Integer(Token):
-#     """"class Integer: token of type int"""
-#     def __init__(self, value):
-#         super().__init__("INT", value)
+class Reserved(Token):
+    """"class Reserved: token of type str, reserved words"""
+    def __init__(self, value):
+        super().__init__("RSVD", value)
+
+class Variable(Token):
+    """"class Variable: token of type str, variables"""
+    def __init__(self, value):
+        super().__init__("VAR(?)", value)

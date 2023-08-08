@@ -6,14 +6,16 @@ takes in a string that contains input
 returns an array (py list) of tokens
 '''
 
-from tokens import Integer, Operator, Float
+from tokens import Integer, Operator, Float, Reserved, Variable
 
 
 class Lexer:
     """class Lexer: analyser"""
     DIGITS = "0123456789"
-    OPS = "+-*/%()"
+    LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    OPS = "+-*/%()="
     STOPWORDS = [" ",]
+    RESERVEDWORDS =  ['make', ]
 
     def __init__(self, text):
         self.text = text
@@ -36,6 +38,10 @@ class Lexer:
             elif self.char in Lexer.STOPWORDS:
                 self.move()
                 continue
+            elif self.char in Lexer.LETTERS:
+                word = self.extract_word()
+
+                self.token = Reserved(self.word)  if word in Lexer.RESERVEDWORDS else Variable(self.word)
 
             self.tokens.append(self.token)
             
@@ -52,6 +58,15 @@ class Lexer:
             self.move()
 
         return Integer(number) if not isFloat else Float(number)
+    
+    def extract_word(self):
+        """method extract_word: extracts chars required to create a token"""
+        word = ""
+        while self.char in Lexer.LETTERS and self.idx<len(self.text):
+            word += self.char
+            self.move()
+
+        return word
 
     def move(self):
         """method move: moves the pointer w/i the current string"""
