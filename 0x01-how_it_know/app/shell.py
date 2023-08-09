@@ -1,6 +1,9 @@
 from lexer import Lexer
 from parser import Parser
 from interpreter import Interpreter
+from data import data
+
+base = Data()
 
 while True:
     text = input("FrankenScript: ~/$:  ")
@@ -8,6 +11,6 @@ while True:
     tokens = tokeniser.tokenise()
     parser = Parser(tokens)
     tree = parser.parse()
-    interpreter = Interpreter(tree)
+    interpreter = Interpreter(tree, base)
     result = interpreter.interpret()
     print(result)

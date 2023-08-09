@@ -13,8 +13,9 @@ from tokens import Integer, Float
 
 class Interpreter:
     """class Interpreter: base interpreter"""
-    def __init__(self, tree):
+    def __init__(self, tree, base):
         self.tree = tree
+        self.data = base
 
     def __str__(self):
         pass
