@@ -41,7 +41,7 @@ class Lexer:
             elif self.char in Lexer.LETTERS:
                 word = self.extract_word()
 
-                self.token = Reserved(self.word)  if word in Lexer.RESERVEDWORDS else Variable(self.word)
+                self.token = Reserved(word)  if word in Lexer.RESERVEDWORDS else Variable(word)
 
             self.tokens.append(self.token)
             

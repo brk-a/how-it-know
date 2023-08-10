@@ -3,14 +3,14 @@ create a database in local storage
 
 takes in an array (the tree) that contains input
 
-returns an object (py dict) representation of a varibales
+returns an object (py dict) representation of a variables
 '''
 
 
 class Data:
     """class Data: base data"""
     def __init__(self):
-        self.varibales = {}
+        self.variables = {}
 
     def __str__(self):
         pass
@@ -28,5 +28,5 @@ class Data:
 
     def write(self, variable, expression):
         """method write. adds a var:expr to dict"""
-        variable_name = variable_value
+        variable_name = variable.value
         self.variables[variable_name] = expression

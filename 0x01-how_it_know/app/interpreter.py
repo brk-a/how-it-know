@@ -50,10 +50,22 @@ class Interpreter:
         """method read_FLT. getter fn to read floats"""
         return float(value)
 
+    def read_VAR(self, id):
+        """method read_VAR. getter fn to read variables"""
+        variable = self.data.read(id)
+        variable_type = variable.type
+
+        return  getattr(self, f"read_{variable_type}")(variable.value)
+        
     def compute_bin(self, left, op, right):
         """method compute_bin: computes arithmetic expressions"""
-        left_type = left.type
-        right_type = right.type
+        left_type = "VAR" if str(left.type).startswith("VAR") else str(left.type)
+        right_type = "VAR" if str(right.type).startswith("VAR") else str(right.type)
+
+        if op.value=="=":
+            left.type = f"VAR({right_type})"
+            self.data.write(left, right)
+            return self.data.read_all()
 
         left = getattr(self, f"read_{left_type}")(left.value)
         right = getattr(self, f"read_{right_type}")(right.value)
