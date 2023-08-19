@@ -28,19 +28,25 @@ class Interpreter:
         if tree is None:
             tree = self.tree
 
-        #evaluate left sub-tree
-        left_node = tree[0]
-        left_node = self.interpret(left_node) if isinstance(left_node, list) else left_node
+        #evaluate unary ops
+        if isinstance(tree, list) and len(tree)==2:
+            return self.compute_unary(tree[0], tree[1])
+        #evaluate no op
+        elif not isinstance(tree, list):
+            return tree
+        else:
+            #evaluate left sub-tree
+            left_node = tree[0]
+            left_node = self.interpret(left_node) if isinstance(left_node, list) else left_node
 
-        #evaluate right sub-tree
-        right_node = tree[-1]
-        right_node = self.interpret(right_node) if isinstance(right_node, list) else right_node
+            #evaluate right sub-tree
+            right_node = tree[-1]
+            right_node = self.interpret(right_node) if isinstance(right_node, list) else right_node
 
-        #evaluate root node
-        op = tree[1]
-        
-        
-        return self.compute_bin(left_node, op, right_node)
+            #evaluate root node
+            op = tree[1]
+            
+            return self.compute_bin(left_node, op, right_node)
 
     def read_INT(self, value):
         """method read_INT. getter fn to read ints"""
@@ -82,3 +88,13 @@ class Interpreter:
             output = left % right
 
         return Integer(output) if (left_type=="INT" and right_type=="int") else Float(output)
+
+    def compute_unary(self, operator, operand):
+        """method compute_unary: computes unary ops"""
+        operand_type = "VAR" if str(operand.type).startswith("VAR") else str(operand.type)
+        operand = getattr(self, f"read_{operand_type}")(operand.value) 
+
+        if operator.value=="+":
+            return +operand
+        if operator.value=="-":
+            return -operand      
