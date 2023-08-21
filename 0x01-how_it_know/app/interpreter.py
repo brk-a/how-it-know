@@ -30,7 +30,10 @@ class Interpreter:
 
         #evaluate unary ops
         if isinstance(tree, list) and len(tree)==2:
-            return self.compute_unary(tree[0], tree[1])
+            expression = tree[1]
+            if isinstance(expression, list):
+                expression = self.interpret(expression)
+            return self.compute_unary(tree[0], expression)
         #evaluate no op
         elif not isinstance(tree, list):
             return tree
@@ -86,6 +89,20 @@ class Interpreter:
             output = left / right
         elif op.value=="%":
             output = left % right
+        elif op.value==">":
+            output = 1 if left > right else 0
+        elif op.value==">=":
+            output = 1 if left >= right else 0
+        elif op.value=="<":
+            output = 1 if left < right else 0
+        elif op.value=="<=":
+            output = 1 if left <= right else 0
+        elif op.value=="?=":
+            output = 1 if left == right else 0
+        elif op.value=="and":
+            output = 1 if left and right else 0
+        elif op.value=="or":
+            output = 1 if left or right else 0
 
         return Integer(output) if (left_type=="INT" and right_type=="int") else Float(output)
 
@@ -97,4 +114,6 @@ class Interpreter:
         if operator.value=="+":
             return +operand
         if operator.value=="-":
-            return -operand      
+            return -operand
+        if operator.value=="not":
+            return 1 if not operand else 0     

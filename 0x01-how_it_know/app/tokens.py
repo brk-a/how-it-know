@@ -37,7 +37,20 @@ class Reserved(Token):
     def __init__(self, value):
         super().__init__("RSVD", value)
 
+
 class Variable(Token):
     """"class Variable: token of type str, variables"""
     def __init__(self, value):
         super().__init__("VAR(?)", value)
+
+
+class Boolean(Token):
+    """"class Boolean: token of type boolean, booleans"""
+    def __init__(self, value):
+        super().__init__("BOOL", value)
+
+
+class Comparison(Token):
+    """"class Comparison: token of type comparison, comparator"""
+    def __init__(self, value):
+        super().__init__("COMP", value)

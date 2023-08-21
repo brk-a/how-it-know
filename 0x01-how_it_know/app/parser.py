@@ -32,14 +32,18 @@ class Parser:
             return self.token
         elif self.token=="(":
             self.move()
-            expression = self.expression()
+            expression = self.boolean_expression()
             return expression
+        elif self.token.value=='not':
+            operator = self.token
+            self.move()
+            return [operator, self.boolean_expression()]
         elif self.token.type.startswith("VAR"):
             return self.token
         elif self.token.value=="+" or self.token.value=="-":
             operator = self.token
             self.move()
-            operand = self.factor()
+            operand = self.boolean_expression()
             return [operator, operand]
 
     def term(self):
@@ -63,6 +67,26 @@ class Parser:
             right_node = self.term()
             left_node = [left_node, op, right_node]
         return left_node
+    
+    def boolean_expression(self):
+        """method boolean_expression: defines the `Boolean` expression"""
+        left_node = self.comparison_expression()
+        while self.token.type=="BOOL":
+            op = self.token
+            self.move()
+            right_node = self.comparison_expression()
+            left_node = [left_node, op, right_node]
+        return left_node
+
+    def comparison_expression(self):
+        """method comparison_expression: defines the `Comparison` expression"""
+        left_node = self.expression()
+        while self.token.type=="COMP":
+            op = self.token
+            self.move()
+            right_node = self.expression()
+            left_node = [left_node, op, right_node]
+        return left_node
 
     def statement(self):
         """method statement: handles declarations and assignments"""
@@ -73,10 +97,10 @@ class Parser:
             if self.token.value=="=":
                 op = self.token
                 self.move()
-                right_node = self.expression()
+                right_node = self.boolean_expression()
                 return [left_node, op, right_node]
-        elif self.token.type=="INT" or self.token.type=="FLT" or self.token.type=="OP":
-            return self.expression()
+        elif self.token.type=="INT" or self.token.type=="FLT" or self.token.type=="OP" or self.token.value=="not":
+            return self.boolean_expression()
 
     def variable(self):
         """method variable: creates a variable"""
