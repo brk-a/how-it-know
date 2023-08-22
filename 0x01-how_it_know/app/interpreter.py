@@ -8,7 +8,7 @@ traverses the "tree" post-order
 returns an array (py list) representation of a binary tree
 '''
 
-from tokens import Integer, Float
+from tokens import Integer, Float, Keyword
 
 
 class Interpreter:
@@ -28,6 +28,19 @@ class Interpreter:
         if tree is None:
             tree = self.tree
 
+        #evaluate conditionals
+        if isinstance(tree, list):
+            if isinstance(tree[0], Keyword):
+                if tree[0].value=="if":
+                    for idx, condition in enumerate(tree[1][0]):
+                        evaluation = self.interpret(condition)
+                        print(evaluation)
+                        if evaluation.value==1:
+                            return self.interpret(tree[1][1][idx])
+                    if len(tree[1])==3:
+                        return self.interpret(tree[1][2])
+                    else:
+                        return
         #evaluate unary ops
         if isinstance(tree, list) and len(tree)==2:
             expression = tree[1]
@@ -112,8 +125,10 @@ class Interpreter:
         operand = getattr(self, f"read_{operand_type}")(operand.value) 
 
         if operator.value=="+":
-            return +operand
-        if operator.value=="-":
-            return -operand
-        if operator.value=="not":
-            return 1 if not operand else 0     
+            output = +operand
+        elif operator.value=="-":
+            output = -operand
+        elif operator.value=="not":
+            output = 1 if not operand else 0
+
+        return Integer(output) if (operand_type=="INT") else Float(output)   

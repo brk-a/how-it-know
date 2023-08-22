@@ -6,7 +6,7 @@ takes in a string that contains input
 returns an array (py list) of tokens
 '''
 
-from tokens import Integer, Operator, Float, Reserved, Variable, Boolean, Comparison
+from tokens import Integer, Operator, Float, Reserved, Variable, Boolean, Comparison, Keyword
 
 
 class Lexer:
@@ -15,10 +15,11 @@ class Lexer:
     LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
     OPS = "+-*/%()="
     STOPWORDS = [" ",]
-    RESERVEDWORDS =  ['make', ]
+    RESERVEDWORDS =  ['make',]
     BOOLS = ['and', 'or', 'not']
     COMAPRISONS = ['>', '<', '>=', '<=', '?=']
     SPECIALCHARS = "><=?"
+    KEYWORDS = ['if', 'elif', 'else', 'do']
 
     def __init__(self, text):
         self.text = text
@@ -48,6 +49,8 @@ class Lexer:
                     self.token = Reserved(word)
                 elif word in Lexer.BOOLS:
                     self.token = Boolean(word)
+                elif word in Lexer.KEYWORDS:
+                    self.token = Keyword(word)
                 else:
                     self.token = Variable(word)
             elif self.char in Lexer.SPECIALCHARS:

@@ -54,3 +54,9 @@ class Comparison(Token):
     """"class Comparison: token of type comparison, comparator"""
     def __init__(self, value):
         super().__init__("COMP", value)
+
+
+class Keyword(Token):
+    """"class Keyword: token of type keyword, keyword"""
+    def __init__(self, value):
+        super().__init__("KWD", value)
