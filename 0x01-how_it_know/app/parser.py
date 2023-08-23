@@ -103,19 +103,8 @@ class Parser:
             return self.boolean_expression()
         elif self.token.value=="if":
             return [self.token, self.if_statements()]
-
-    # def if_statement(self):
-    #     """method if_statement: handles the `do` conditional"""
-    #     self.move()
-    #     condition = self.boolean_expression()
-
-    #     if self.token.value=="do":
-    #         self.move()
-    #         action = self.statement()
-    #         return condition, action
-    #     elif self.tokens[self.idx-1].value=="do":
-    #         action = self.statement()
-    #         return condition, action
+        elif self.token.value=="while":
+            return [self.token, self.while_statement()]
     
     def if_statements(self):
         """method if_statements: handles the `if-elif-else` conditionals"""
@@ -151,6 +140,19 @@ class Parser:
         elif self.tokens[self.idx-1].value=="do":
             action = self.statement()
             return condition, action
+
+    def while_statement(self):
+        """method while_statement: handles the `while` conditional"""
+        self.move()
+        condition = self.boolean_expression()
+
+        if self.token.value=="do":
+            self.move()
+            action = self.statement()
+            return [condition, action]
+        elif self.tokens[self.idx-1].value=="do":
+            action = self.statement()
+            return [condition, action]
 
     def variable(self):
         """method variable: creates a variable"""

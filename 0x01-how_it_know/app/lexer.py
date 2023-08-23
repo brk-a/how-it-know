@@ -19,7 +19,7 @@ class Lexer:
     BOOLS = ['and', 'or', 'not']
     COMAPRISONS = ['>', '<', '>=', '<=', '?=']
     SPECIALCHARS = "><=?"
-    KEYWORDS = ['if', 'elif', 'else', 'do']
+    KEYWORDS = ['if', 'elif', 'else', 'do', 'while']
 
     def __init__(self, text):
         self.text = text

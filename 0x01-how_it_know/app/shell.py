@@ -13,4 +13,5 @@ while True:
     tree = parser.parse()
     interpreter = Interpreter(tree, base)
     result = interpreter.interpret()
-    print(result)
+    if result is not None:
+        print(result)
